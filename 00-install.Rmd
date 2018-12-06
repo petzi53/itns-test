@@ -1,0 +1,47 @@
+---
+title: "00-Installation"
+author: "Peter Baumgartner"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    pandoc_args: --number-offset=0,0
+    toc: yes
+    toc_depth: '4'
+    latex_engine: xelatex
+  word_document:
+    toc: yes
+    toc_depth: '4'
+  html_notebook:
+    fig_caption: yes
+    number_sections: yes
+    pandoc_args: --number-offset=0,0
+    toc: yes
+    toc_depth: 4
+  github_document:
+    toc: yes
+    toc_depth: 4
+  html_document:
+    fig_caption: yes
+    keep_md: yes
+    number_sections: yes
+    pandoc_args: --number-offset=0,0
+    toc: yes
+    toc_depth: 4
+---
+```{r label = "global-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T
+        )
+
+```
+
+```{r install-itns-package, eval=FALSE}
+if (!requireNamespace("devtools")) install.packages("devtools")
+devtools::install_github("gitrman/itns")
+```
+

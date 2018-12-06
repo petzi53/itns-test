@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Peter Baumgartner" />
+
+<meta name="date" content="2018-12-06" />
+
+<meta name="progressive" content="true" />
+<meta name="allow-skip" content="true" />
+
+<title>itns Tutorial</title>
+
+
+<!-- highlightjs -->
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+
+
+<div class="pageContent band">
+<div class="bandContent page">
+
+<div class="topics">
+
+<div id="section-preface" class="section level1">
+<h1>Preface</h1>
+<div id="section-goal-of-this-interactive-tutorial" class="section level2">
+<h2>Goal of this interactive tutorial</h2>
+<p>This tutorial contains some supplementary material for <a href="https://www.routledgetextbooks.com/textbooks/9781138825529/default.php">Introduction to the New Statistics: Estimation, Open Science, and Beyond</a> by Geoff Cumming and Robert Calin-Jageman (2017, New York: Routledge) or for short <em>itns</em>. In this tutorial I provide some interactive exercises offered in the book above.</p>
+<center>
+<p><a href="https://www.routledgetextbooks.com/textbooks/9781138825529/default.php"><img src="https://images-na.ssl-images-amazon.com/images/I/519a-fD7UJL._SX348_BO1,204,203,200_.jpg" alt="Cumming, G., &amp; Calin-Jageman, R. (2016). Introduction to the New Statistics: Estimation, Open Science, and Beyond. New York: ROUTLEDGE." /></a></p>
+</center>
+<p>Because I am not a statistician therefore is this material not intended as an authoratative guide or qualitative addiitional teaching ressource. My main purpose of this tutorial is to provide a proof of the concept. I want to test the possibilities of the R package <code>learnr</code> in conjunction with <code>shiny</code> to provide interactive exercises for a better understanding of statistical concepts and some training in using the <a href="https://www.r-project.org/">R language</a> for solving statistical tasks.</p>
+<p>From an educational point of view this material has to overcome two difficulties at the same time:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Understanding of statistical concepts:</strong> These types of exercises should be independent of the software one is going to use. Borrowing a term by Donald Schön these tasks are so-called “local exerpiments”. Local exerpiments are for instance: “What happens if a data point lies exactly on a bin boundary? Perform an experiment to find out.” or “With the Laptop data …, what two extra data points could you add without changing the mean or the SD?”). — <em>itns</em> is using ESCI — a special Excel programmed software — for these kinds of inquiries. These exercises are great and are one of the outstanding features of <em>itns</em> but lack connection to a modern statistical software.</p></li>
+<li><p><strong>Learning and applying R:</strong> These second types of exercises are tool dependent. One has to know how the R language works, what kind of commands, functions and packages one has to use. Because of an overwhelming complexitiy R is infamous for its steep learning curve. There is no guidance by menues but users have to write code lines and programme their statistical explorations and analysis. — <em>itns</em> is using some additional exploratory files for SPSS and R usage. As important information these files have, they provide not the same leven of “local experiments” as this is done with the ESCI software.</p></li>
+</ol>
+<p><strong>References:</strong></p>
+<ul>
+<li>Schön, D. A. (1984). The Reflective Practitioner: How Professionals Think in Action. Perseus Books.</li>
+<li>Schön, D. A. (1990). Educating the Reflective Practitioner: Toward a New Design for Teaching and Learning in the Professions (1st edition). John Wiley &amp; Sons.]</li>
+</ul>
+</div>
+<div id="section-target-group-and-learning-outcomes" class="section level2">
+<h2>Target group and learning outcomes</h2>
+<p>This interactive tutorial is primarily intended for people who work through itns and want to have more interactive exercises using R. No familiarity with introductory statistics is assumed, but some basic grasp of using computers is necessary.</p>
+<p>The following learning outcomes provide information at the course level. As there are different levels in a curriculum (course, module/chapter lesson/section etc.) with their own learning outcomes, only 3-5 learning outcomes on each level is sufficent. In formulating the following outcomes I am applying the taxonomy by Anderson &amp; Krathwohl (2001, 2002) which is an extended and revised edition of the original taxonomy by Bloom (1956).</p>
+<!-- The following is done via [bootstrap v.4](https://v4-alpha.getbootstrap.com/components/alerts/). This is not the [newest version 4.1](https://getbootstrap.com/docs/4.1/components/alerts/) -->
+<div class="alert alert-warning" role="alert">
+<p>The following learning outcomes are my tentative approximation and has still to be confirmed by the book authors.</p>
+</div>
+<p>Having successfully completed the itns-bokk with this interactive course you will be able to:</p>
+<ul>
+<li>explain the differences between the NHST (Null hypothesis significance testing) and the new statistics approach (effect sizes, confidence intervals, and meta-analysis).</li>
+<li>to follow the new statistical approach of estimation by using the R programme package.</li>
+<li>manipulate and transform data with R to bring them in a format suitable for exploratory data analysis</li>
+<li>create high quality data visualizations with the R package ggplot2</li>
+<li>apply Open Science procedures in order to foster transparency and reproducibility to your research projects</li>
+</ul>
+<p><strong>References:</strong></p>
+<ul>
+<li>Anderson, L. W. (2002). Revising Bloom’s taxonomy. Columbus, OH: Ohio State University.</li>
+<li>Anderson, L. W., &amp; Krathwohl, D. R. (2001). A taxonomy for learning, teaching, and assessing: a revision of Bloom’s taxonomy of educational objectives. New York: Longman.</li>
+<li>Bloom, B. S., &amp; Krathwohl, D. R. (1956). Taxonomy of Educational Objectives Book 1: Cognitive Domain (2nd ed.). Longman.</li>
+</ul>
+</div>
+<div id="section-how-to-use-this-tutorial" class="section level2">
+<h2>How to use this tutorial?</h2>
+<p>[Here I will explain the different display modes and required actions]</p>
+<p>This interactive course is written in R Markdown and uses the <a href="https://rstudio.github.io/learnr/"><code>learnr</code></a> package in combination with the <a href="https://github.com/dtkaplan/checkr"><code>checkr</code></a>. The source code can be inspected at <a href="https://github.com/petzi53/itns">my GitHub account</a>.</p>
+<p>I have written this tutorial to rebuild my own competences in statistics and at the same time to improve my R skills. As I am not an expert on both subject please help to improve this tutorial via pull requests (PR) at GitHub or <a href="mailto:peter_baumgartner@me.com">contact me</a> for errors or other improvements.</p>
+</div>
+<div id="section-table-of-contents" class="section level2">
+<h2>Table of contents</h2>
+<ul>
+<li>00-itns: Preface (this file)<br />
+</li>
+<li><a href="https://pbaumgartner.shinyapps.io/itns-01/">01-itns</a>: Asking and Answering Research Questions<br />
+</li>
+<li>02-itns: Research Fundamentals: Don’t Fool Yourself<br />
+</li>
+<li>03-itns: Picturing and Describing Data</li>
+<li>04-itns: The Normal Distribution and Sampling<br />
+</li>
+<li>05-itns: Confidence Intervals and Effect Sizes<br />
+</li>
+<li>06-itns: p Values, Null Hypothesis Significance Testing, and Confidence Intervals<br />
+</li>
+<li>07-itns: The Independent Groups Design<br />
+</li>
+<li>08-itns: The Paired Design</li>
+<li>09-itns: Meta-Analysis<br />
+</li>
+<li>10-itns: Open Science and Planning Research</li>
+<li>11-itns: Correlation<br />
+</li>
+<li>12-itns: Regression</li>
+<li>13-itns: Frequencies, Proportions, and Risk</li>
+<li>14-itns: Extended Designs: One Independent Variable</li>
+<li>15-itns: Extended Designs: Two Independent Variables</li>
+<li>16-itns: Future Directions</li>
+</ul>
+
+<script type="application/shiny-prerendered" data-context="server-start">
+library(learnr)
+library(checkr)
+tutorial_options(exercise.checker = checkr::check_for_learnr)
+knitr::opts_chunk$set(
+        message = T,
+        error = T,
+        warning = T,
+        comment = '##',
+        highlight = T,
+        prompt = F,
+        echo = F
+        )
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::register_http_handlers(session, metadata = NULL)
+</script>
+ <!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/cerulean.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["pagedtable"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/pagedtable-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/pagedtable.js"]},{"type":"character","attributes":{},"value":["css/pagedtable.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["9.12.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/highlightjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["textmate.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9.2.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9.2.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9.2.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-format"]},{"type":"character","attributes":{},"value":["0.9.2.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmarkdown/templates/tutorial/resources"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-format.js"]},{"type":"character","attributes":{},"value":["tutorial-format.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["5.0.13"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/fontawesome"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/fontawesome-all.min.js","js/fa-v4-shims.min.js"]},{"type":"character","attributes":{},"value":["css/fa-svg-with-js.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootbox"]},{"type":"character","attributes":{},"value":["4.4.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/bootbox"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["bootbox.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9.2.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9.2.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9.2.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]}]}
+</script>
+<!--/html_preserve-->
+</div>
+</div>
+
+</div> <!-- topics -->
+
+<div class="topicsContainer">
+<div class="topicsPositioner">
+<div class="band">
+<div class="bandContent topicsListContainer">
+
+<!-- begin doc-metadata -->
+<div id="doc-metadata">
+<h2 class="title toc-ignore" style="display:none;">itns Tutorial</h2>
+<h4 class="author"><em>Peter Baumgartner</em></h4>
+<h4 class="date"><em>2018-12-06</em></h4>
+</div>
+<!-- end doc-metadata -->
+
+</div> <!-- bandContent.topicsListContainer -->
+</div> <!-- band -->
+</div> <!-- topicsPositioner -->
+</div> <!-- topicsContainer -->
+
+
+</div> <!-- bandContent page -->
+</div> <!-- pageContent band -->
+
+
+
+
+<script>
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+
+</html>
