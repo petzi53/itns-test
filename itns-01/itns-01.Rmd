@@ -1,0 +1,262 @@
+---
+title: "itns Tutorial: 01-Chapter "
+author: "Peter Baumgartner"
+date: "`r Sys.Date()`"
+output: 
+    learnr::tutorial:
+        progressive: true
+        allow_skip: true
+        theme: cerulean
+runtime: shiny_prerendered
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(checkr)
+library(ggplot2)
+library(stringr)
+tutorial_options(exercise.checker = checkr::check_for_learnr)
+knitr::opts_chunk$set(
+        message = T,
+        error = T,
+        warning = T,
+        comment = '##',
+        highlight = T,
+        prompt = F,
+        echo = F
+        )
+
+correct = "<font color='green'>"
+incorrect = "<font color='red'>"
+no_text = "<font color='red'>[not filled]"
+```
+
+## 01: Asking and Answering Research Questions
+
+### Research questions (Video)
+
+<div class="alert alert-info" role="alert">
+  <strong>Info:</strong> It is possible to embed videos into this interactive tutorial. But the video must be published either in YouTube or in Vimeo. I have downloaded just one video from the Routledge website to test this funtionality. I am not sure if this is legally allowed.
+</div>
+
+
+![](https://youtu.be/oRf7iWEsx9o)
+
+## Research Steps Sequences?
+
+<div class="alert alert-info" role="alert">
+   <strong>Info:</strong> The next exercise tries to use an ordering questions. Unfortunately there is no functionality in `learnr` to for reordering sentences for example via drag & drop. I tried it with a multiple choice question. - Try this question several times, wrong answers give an taylored feedback.
+</div>
+
+There is a common way how research proceeds. Try to figure out the order of the different research steps: 
+
+1. Apply statistical analysis.
+2. Design a study to collect data.
+3. Ask a research question.
+4. Draw conclusions.
+5. Interpret the results.
+6. Carry out the study and collect the data.
+
+```{r research-steps}
+question("What is the correct research sequence of the above research phases?",
+  answer("1, 2, 3, 4, 6, 5", message = "The is the wrong sequence I have provided in the text above this question. You have to find the correct order for these research steps."),
+  answer("3, 6, 2, 1, 4, 5", message = "You cannot carry out a study before you have designed it."),
+  answer("3, 2, 6, 1, 4, 5", correct = TRUE),
+  answer("3, 2, 6, 1, 5, 4", message = "You have to draw conclusion before you interpret the results in a written report."),
+  answer("3, 2, 6, 4, 1, 5", message = "You have to apply statistical analysis before you can draw conclusions."),
+  answer("2, 6, 1, 3, 4, 5", message = "You have at first generate a research question before you design an appropriate study to collect data to answer your question."),
+  random_answer_order = TRUE,
+  allow_retry = TRUE)
+```
+
+## A Thumbnail Research Sketch
+
+Here is the correct order with some details taken form the opinion poll example in the book:
+
+1. **Ask a research question.** What’s the support for Proposition A in the population of people likely to vote?
+2. **Design a study to collect data that can answer the question.** Design a poll that will ask a sample of intending voters about their support for Proposition A.
+3. **Carry out the study and collect the data.** Choose a sample of intending voters and ask them about their support for the proposition.
+4. **Apply statistical analysis to picture and describe the data, and provide a basis for drawing conclusions.** Calculate that 53% of people in the sample say they support the proposition. Use knowledge of the poll design, especially the size of the sample, to calculate from the data that the margin of error is 2%, and therefore the confidence interval extends from 51% to 55%. Prepare the following figure:
+
+![](../images/opinion-poll.png)
+
+5. **Draw conclusions about what the data tell us in answer to our original question.** We take the 53% as the best estimate the data can give us of support in the population of likely voters, and the 2% margin of error as indicating the uncertainty in that estimate. In the figure, the dot marks the best estimate, and the confidence interval indicates the range of uncertainty.
+6. **Interpret the results, give a critical discussion of the whole study, and prepare a report.** Think about the next study. Most likely, the true level of support among intending voters is within the interval from 51% to 55%, therefore the proposition is likely to be approved — although it may not be.
+
+
+
+## Quiz 1.1 (1st Part)
+
+
+```{r quiz1-1}
+quiz(caption = "Quiz 1.1 (1st Part)",
+  question("A company is interested in how satisfied its customers are. To help find out, 50 customers are randomly selected to take part in a survey. Which of the following is true?",
+    answer("The 50 customers surveyed are the sample, all the company’s customers are the
+population.", correct = TRUE),
+    answer("Whatever result is found in the sample will be exactly the same in the population."),
+    answer("The company would be better off sampling only 10 customers, 
+           as this would produce less uncertainty about overall customer satisfaction."),
+    answer("All of the answers in this question."),
+    random_answer_order = TRUE
+  ),
+  question("A confidence interval (CI) expresses…",
+    answer("a range of plausible values for what is most likely true in the population."),
+    answer("our uncertainty about what is true in the population."),
+    answer("the fact that results from a sample may not perfectly reflect the population, due to sampling variability."),
+    answer("all of the answers in this question.", correct = TRUE),
+    random_answer_order = TRUE
+  ),
+    question("You read a poll result that says “62 ± 4% of likely voters support the referendum”. What is the ±4% part?",
+    answer("This is the point estimate for referendum support."),
+    answer("This is the population for referendum support."),
+    answer("This is the margin of error (MoE).", correct = TRUE),
+    answer("This is the sample size."),
+    random_answer_order = TRUE
+  ),
+question("If the poll in the previous question was conducted well, which of these results would be most unlikely?",
+    answer("The referendum passes with 66% support."),
+    answer("The referendum passes with 63% support."),
+    answer("The referendum passes with 61% support."),
+    answer("The referendum passes with 55% support.", correct = TRUE),
+    random_answer_order = TRUE
+  )
+)
+
+```
+
+## Quiz 1.1 (2nd Part)
+
+<div class="alert alert-info" role="alert">
+  <strong>Info:</strong> In `Learnr` there is no question type "Fill in the Gap". So I had to write it on my own.
+</div>
+
+
+```{r my-gap-task1, context="render"}
+
+bootstrapPage(
+        "We calculate a CI from the ",
+        div(style="display:inline-block", selectInput(inputId = 'in1', label = NULL, c(Choose='', c("sample", "population")), selectize=FALSE, width = '100px')),
+        " and use it to tell us about the ",
+        div(style="display:inline-block", selectInput(inputId = 'in2', NULL, c(Choose='', c("sample", "population")), selectize=FALSE, width = '100px')),
+        ". Half the length of the CI is called the ",
+        div(style="display:inline-block",textInput(inputId="in3", label = NULL, value = NULL, width = '200px')), 
+        " with abbreviation",
+        div(style="display:inline-block",textInput(inputId="in4", label = NULL, value = NULL, width = '70px')),
+        ".",
+        div(actionButton("action1", "Submit Answer", 
+                style="color: #fff; background-color: #337ab7; border-color: #2e6da4")),
+        htmlOutput("displaySolution1"),
+        hr(),
+        
+        "If N, the sample size, is made four times as large, the CI length will be about ",
+        div(style="display:inline-block",textInput(inputId="in5", label = NULL, value = NULL, width = '70px')), 
+        " what it was before, the precision will be ",
+        div(style="display:inline-block", selectInput(inputId = 'in6', NULL, c(Choose='', c("lower", "higher")), selectize=FALSE, width = '100px')),
+        " and the researcher is likely to be ",
+        div(style="display:inline-block", selectInput(inputId = 'in7', label = NULL, c(Choose='', c("more", "less")), selectize=FALSE, width = '100px')),
+        " happy.",
+        div(actionButton("action2", "Submit Answer", 
+                style="color: #fff; background-color: #337ab7; border-color: #2e6da4")),
+        htmlOutput("displaySolution2"),
+        hr()
+    )
+```
+
+
+```{r my-gap-solution1, context="server"}
+
+
+output$displaySolution1 <- renderText({ 
+    input$action
+    if (input$action1 == 0) # to prevent results shown first time immediately 
+        return()
+    else {
+        if (input$in1 == 'sample'){
+            mark1 <- correct
+        } else if (input$in1 == ''){
+            mark1 <- no_text
+        } else {
+            mark1 <- incorrect
+        }
+        
+        if (input$in2 == 'population'){
+            mark2 <- correct
+        } else if (input$in2 == ''){
+            mark2 <- no_text
+        } else {
+            mark2 <- incorrect
+        }
+        
+        if (str_to_lower(str_trim(input$in3)) == 'margin of error'){
+            mark3 <- correct
+        } else if (input$in3 == ''){
+            mark3 <- no_text
+        } else {
+            mark3 <- incorrect
+        }
+        
+        if (input$in4 == 'MoE'){
+            mark4 <- correct
+        } else if (input$in4 == ''){
+            mark4 <- no_text
+        } else {
+            mark4 <- incorrect
+        }
+ 
+        isolate(paste0(
+          tags$hr(), incorrect, "Red", "</font>", " = Your solution was wrong.",
+          correct, " Green:", "</font>", " = Your solution was correct.", "<br /><br />",
+          " We calculate a CI from the ", mark1, input$in1, "</font>",
+          " and use it to tell us about the ", mark2, input$in2, "</font>",
+          " and the researcher is likely to be ", mark3, input$in3, "</font>",
+          " with abbreviation ", mark4, input$in4, "</font>", "."))
+        }
+  })
+
+
+
+output$displaySolution2 <- renderText({ 
+    input$action
+    if (input$action2 == 0) # to prevent results shown first time immediately 
+        return()
+    else {
+        if (str_to_lower(str_trim(input$in5)) == 'half'){
+            mark5 <- correct
+        } else if (input$in5 == ''){
+            mark5 <- no_text
+        } else {
+            mark5 <- incorrect
+        }
+        
+        if (input$in6 == 'higher'){
+            mark6 <- correct
+        } else if (input$in6 == ''){
+            mark6 <- no_text
+        } else {
+            mark6 <- incorrect
+        }
+        
+        if (input$in7 == 'more'){
+            mark7 <- correct
+        } else if (input$in7 == ''){
+            mark7 <- no_text
+        } else {
+            mark7 <- incorrect
+        }
+        
+
+        isolate(paste0(
+          tags$hr(), incorrect, "Red", "</font>", " = Your solution was wrong.",
+          correct, " Green:", "</font>", " = Your solution was correct.", "<br /><br />",
+          " If N, the sample size, is made four times as large, the CI length will be about ", mark5, input$in5, "</font>",
+          " what it was before, the precision will be ", mark6, input$in6, "</font>",
+          ". Half the length of the CI is called the ", mark7, input$in7, "</font>",
+          " happy."))
+        }
+  })
+
+
+
+```
+
