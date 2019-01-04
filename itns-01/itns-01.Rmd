@@ -16,7 +16,10 @@ library(learnr)
 library(checkr)
 library(ggplot2)
 library(stringr)
-tutorial_options(exercise.checker = checkr::check_for_learnr)
+library(shinyjs)
+# see: https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html
+shiny::addResourcePath("shinyjs", system.file("srcjs", package = "shinyjs"))
+# tutorial_options(exercise.checker = checkr::check_for_learnr)
 knitr::opts_chunk$set(
         message = T,
         error = T,
@@ -31,6 +34,9 @@ correct = "<font color='green'>"
 incorrect = "<font color='red'>"
 no_text = "<font color='red'>[not filled]"
 ```
+
+<!-- see https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html -->
+<script src="shinyjs/inject.js"></script>
 
 ## 01: Asking and Answering Research Questions
 
@@ -127,7 +133,7 @@ question("If the poll in the previous question was conducted well, which of thes
 
 ## Quiz 1.1 (2nd Part)
 
-<div class="alert alert-info" role="alert">
+<div class="alert alert-info" role="alert-dismissible">
   <strong>Info:</strong> In `Learnr` there is no question type "Fill in the Gap". So I had to write it on my own.
 </div>
 
@@ -156,7 +162,7 @@ bootstrapPage(
         " and the researcher is likely to be ",
         div(style="display:inline-block", selectInput(inputId = 'in7', label = NULL, c(Choose='', c("more", "less")), selectize=FALSE, width = '100px')),
         " happy.",
-        div(actionButton("action2", "Submit Answer", 
+        div(actionButton("action2", "Submit Answer",
                 style="color: #fff; background-color: #337ab7; border-color: #2e6da4")),
         htmlOutput("displaySolution2"),
         hr()
@@ -168,7 +174,6 @@ bootstrapPage(
 
 
 output$displaySolution1 <- renderText({ 
-    input$action
     if (input$action1 == 0) # to prevent results shown first time immediately 
         return()
     else {
@@ -176,6 +181,7 @@ output$displaySolution1 <- renderText({
             mark1 <- correct
         } else if (input$in1 == ''){
             mark1 <- no_text
+            
         } else {
             mark1 <- incorrect
         }
@@ -203,7 +209,7 @@ output$displaySolution1 <- renderText({
         } else {
             mark4 <- incorrect
         }
- 
+        shinyjs::hide(id = "action1")
         isolate(paste0(
           tags$hr(), incorrect, "Red", "</font>", " = Your solution was wrong.",
           correct, " Green:", "</font>", " = Your solution was correct.", "<br /><br />",
@@ -211,13 +217,13 @@ output$displaySolution1 <- renderText({
           " and use it to tell us about the ", mark2, input$in2, "</font>",
           " and the researcher is likely to be ", mark3, input$in3, "</font>",
           " with abbreviation ", mark4, input$in4, "</font>", "."))
+
         }
   })
 
 
 
 output$displaySolution2 <- renderText({ 
-    input$action
     if (input$action2 == 0) # to prevent results shown first time immediately 
         return()
     else {
@@ -245,7 +251,7 @@ output$displaySolution2 <- renderText({
             mark7 <- incorrect
         }
         
-
+        shinyjs::hide(id = "action2")
         isolate(paste0(
           tags$hr(), incorrect, "Red", "</font>", " = Your solution was wrong.",
           correct, " Green:", "</font>", " = Your solution was correct.", "<br /><br />",
@@ -259,4 +265,68 @@ output$displaySolution2 <- renderText({
 
 
 ```
+
+## Test: Hide Button
+
+```{r display-button, context="render"}
+bootstrapPage(shinyjs::useShinyjs(),
+        p('Click the "Submit" button to hide it.'),
+        div(actionButton("Button1", "Submit Answer", 
+        class="btn btn-primary")),        
+        htmlOutput("displaySolution"),
+        hr()
+        )
+
+```
+
+```{r hide-button, context="server"}
+
+# see: https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html
+shinyjs::useShinyjs(html = TRUE)
+
+output$displaySolution <- renderText({
+    if (input$Button1 > 0) {
+        shinyjs::hide(id = "Button1")
+        "Success!"
+    }
+})
+```
+
+
+<!-- ## Modal dialog -->
+
+<!-- ```{r modal-dialog} -->
+<!-- # Display an important message that can be dismissed only by clicking the -->
+<!-- # dismiss button. -->
+<!-- bootstrapPage( -->
+<!--     actionButton("show", "Show modal dialog") -->
+<!-- ) -->
+<!-- ``` -->
+
+<!-- ```{r test, context="server"} -->
+<!--     observeEvent(input$show, { -->
+<!--       showModal(modalDialog( -->
+<!--         title = "Important message", -->
+<!--         "This is an important message!") -->
+<!--         ) -->
+<!--         } -->
+<!--     ) -->
+
+<!-- ``` -->
+
+
+
+
+
+<!-- ## Map test -->
+
+<!-- ```{r} -->
+<!-- library(leaflet) -->
+
+<!-- m <- leaflet() %>% -->
+<!--   addTiles() %>%  # Add default OpenStreetMap map tiles -->
+<!--   setView(15.600945, 48.409954, zoom = 18) %>% -->
+<!--   addMarkers(lng=15.600945, lat=48.409954, popup="Hier wohnt Ingrid und Peter") -->
+<!-- m  # Print the map -->
+<!-- ``` -->
 

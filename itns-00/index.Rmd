@@ -14,7 +14,7 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 library(checkr)
-tutorial_options(exercise.checker = checkr::check_for_learnr)
+# tutorial_options(exercise.checker = checkr::check_for_learnr)
 knitr::opts_chunk$set(
         message = T,
         error = T,
