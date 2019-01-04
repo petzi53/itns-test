@@ -133,7 +133,7 @@ question("If the poll in the previous question was conducted well, which of thes
 
 ## Quiz 1.1 (2nd Part)
 
-<div class="alert alert-info" role="alert-dismissible">
+<div class="alert alert-info" role="alert">
   <strong>Info:</strong> In `Learnr` there is no question type "Fill in the Gap". So I had to write it on my own.
 </div>
 
@@ -172,97 +172,65 @@ bootstrapPage(
 
 ```{r my-gap-solution1, context="server"}
 
+# see: https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html
+shinyjs::useShinyjs(html = TRUE)
 
-output$displaySolution1 <- renderText({ 
-    if (input$action1 == 0) # to prevent results shown first time immediately 
-        return()
-    else {
-        if (input$in1 == 'sample'){
-            mark1 <- correct
-        } else if (input$in1 == ''){
-            mark1 <- no_text
-            
+output$displaySolution1 <- renderPrint({
+    observeEvent(input$action1, {
+        if (input$in1 == '' || input$in2 == '' || input$in3 == '' || input$in4 == '') {
+            showModal(modalDialog("You have to fill in all the gaps.", 
+                                  easyClose = TRUE, size = "s"))
+            return()
         } else {
-            mark1 <- incorrect
-        }
-        
-        if (input$in2 == 'population'){
-            mark2 <- correct
-        } else if (input$in2 == ''){
-            mark2 <- no_text
-        } else {
-            mark2 <- incorrect
-        }
-        
-        if (str_to_lower(str_trim(input$in3)) == 'margin of error'){
-            mark3 <- correct
-        } else if (input$in3 == ''){
-            mark3 <- no_text
-        } else {
-            mark3 <- incorrect
-        }
-        
-        if (input$in4 == 'MoE'){
-            mark4 <- correct
-        } else if (input$in4 == ''){
-            mark4 <- no_text
-        } else {
-            mark4 <- incorrect
-        }
-        shinyjs::hide(id = "action1")
-        isolate(paste0(
-          tags$hr(), incorrect, "Red", "</font>", " = Your solution was wrong.",
-          correct, " Green:", "</font>", " = Your solution was correct.", "<br /><br />",
-          " We calculate a CI from the ", mark1, input$in1, "</font>",
-          " and use it to tell us about the ", mark2, input$in2, "</font>",
-          " and the researcher is likely to be ", mark3, input$in3, "</font>",
-          " with abbreviation ", mark4, input$in4, "</font>", "."))
+            if (input$in1 == 'sample' && input$in2 == 'population' &&
+                str_to_lower(str_trim(input$in3)) == 'margin of error' &&
+                str_trim(input$in4) == 'MoE') {
+                value <- 'Corrrect:'
+                alert <- '<div class="alert alert-success" role="alert">'
+            } else {
+                value <- 'Incorrect:'
+                alert <- '<div class="alert alert-danger" role="alert">'
+            }
 
+            myText1 <- paste("We calculate a CI from the <strong>sample</strong>",
+                       "and use it to tell us about the <strong>population</strong>. ",
+                       " Half the length of the CI is called the ",
+                       "<strong>margin of error</strong> with abbreviation",
+                       "<strong>MoE</strong>.")
+            shinyjs::hide(id = "action1")
+            txt1 <- eventReactive(input$action1, paste(alert, value, myText1, '</div>'))
+            output$displaySolution1 <- txt1
         }
-  })
+    })
+})
 
 
-
-output$displaySolution2 <- renderText({ 
-    if (input$action2 == 0) # to prevent results shown first time immediately 
-        return()
-    else {
-        if (str_to_lower(str_trim(input$in5)) == 'half'){
-            mark5 <- correct
-        } else if (input$in5 == ''){
-            mark5 <- no_text
+output$displaySolution2 <- renderPrint({
+    observeEvent(input$action2, {
+        if (input$in5 == '' || input$in6 == '' || input$in7 == '') {
+            showModal(modalDialog("You have to fill in all the gaps.", 
+                                  easyClose = TRUE, size = "s"))
+            return()
         } else {
-            mark5 <- incorrect
-        }
-        
-        if (input$in6 == 'higher'){
-            mark6 <- correct
-        } else if (input$in6 == ''){
-            mark6 <- no_text
-        } else {
-            mark6 <- incorrect
-        }
-        
-        if (input$in7 == 'more'){
-            mark7 <- correct
-        } else if (input$in7 == ''){
-            mark7 <- no_text
-        } else {
-            mark7 <- incorrect
-        }
-        
-        shinyjs::hide(id = "action2")
-        isolate(paste0(
-          tags$hr(), incorrect, "Red", "</font>", " = Your solution was wrong.",
-          correct, " Green:", "</font>", " = Your solution was correct.", "<br /><br />",
-          " If N, the sample size, is made four times as large, the CI length will be about ", mark5, input$in5, "</font>",
-          " what it was before, the precision will be ", mark6, input$in6, "</font>",
-          ". Half the length of the CI is called the ", mark7, input$in7, "</font>",
-          " happy."))
-        }
-  })
+            if (str_to_lower(str_trim(input$in5)) == 'half' && input$in6 == 'higher' &&
+                str_trim(input$in7) == 'more') {
+                value <- 'Corrrect:'
+                alert <- '<div class="alert alert-success" role="alert">'
+            } else {
+                value <- 'Incorrect:'
+                alert <- '<div class="alert alert-danger" role="alert">'
+            }
 
-
+            myText2 <- paste("If N, the sample size, is made four times as large, ",
+                       "the CI length will be about <strong>half</strong> what it was before, ",
+                       "the precision will be <strong>higher</strong> and the researcher is ",
+                       "likely to be <strong>more</strong> happy.")
+            shinyjs::hide(id = "action2")
+            txt2 <- eventReactive(input$action2, paste(alert, value, myText2, '</div>'))
+            output$displaySolution2 <- txt2
+        }
+    })
+})
 
 ```
 
@@ -270,6 +238,7 @@ output$displaySolution2 <- renderText({
 
 ```{r display-button, context="render"}
 bootstrapPage(shinyjs::useShinyjs(),
+        textInput("myText", "Input"),
         p('Click the "Submit" button to hide it.'),
         div(actionButton("Button1", "Submit Answer", 
         class="btn btn-primary")),        
@@ -284,35 +253,43 @@ bootstrapPage(shinyjs::useShinyjs(),
 # see: https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html
 shinyjs::useShinyjs(html = TRUE)
 
-output$displaySolution <- renderText({
-    if (input$Button1 > 0) {
-        shinyjs::hide(id = "Button1")
-        "Success!"
-    }
+output$displaySolution <- renderPrint({
+    # renderText({input$myText})
+    observeEvent(input$Button1, {
+        if (input$myText == '') {
+            showModal(modalDialog("You have to fill all the gaps.", 
+                                  easyClose = TRUE, size = "s"))
+            return()
+        } else {
+            shinyjs::hide(id = "Button1")
+            txt <- eventReactive(input$Button1, paste('<div class="alert alert-success" role="alert">', 'This is the solution:', input$myText, '</div>'))
+            output$displaySolution <- txt
+        }
+    })
 })
 ```
 
 
-<!-- ## Modal dialog -->
+## Modal dialog
 
-<!-- ```{r modal-dialog} -->
-<!-- # Display an important message that can be dismissed only by clicking the -->
-<!-- # dismiss button. -->
-<!-- bootstrapPage( -->
-<!--     actionButton("show", "Show modal dialog") -->
-<!-- ) -->
-<!-- ``` -->
+```{r modal-dialog1}
+# Display an important message that can be dismissed only by clicking the
+# dismiss button.
+bootstrapPage(
+    actionButton("show", "Show modal dialog")
+)
+```
 
-<!-- ```{r test, context="server"} -->
-<!--     observeEvent(input$show, { -->
-<!--       showModal(modalDialog( -->
-<!--         title = "Important message", -->
-<!--         "This is an important message!") -->
-<!--         ) -->
-<!--         } -->
-<!--     ) -->
+```{r modal-dialog2, context="server"}
+    observeEvent(input$show, {
+      showModal(modalDialog(
+        title = "Important message",
+        "This is an important message!")
+        )
+        }
+    )
 
-<!-- ``` -->
+```
 
 
 
