@@ -1,0 +1,69 @@
+---
+title: "Bootstrap Demo"
+author: "Peter Baumgartner"
+date: "`r Sys.Date()`"
+output: 
+    learnr::tutorial:
+        progressive: true
+        allow_skip: true
+        theme: cerulean
+        css: "css/mystyle.css"
+runtime: shiny_prerendered
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(checkr)
+# tutorial_options(exercise.checker = checkr::check_for_learnr)
+knitr::opts_chunk$set(
+        message = T,
+        error = T,
+        warning = T,
+        comment = '##',
+        highlight = T,
+        prompt = F,
+        echo = F
+        )
+
+```
+
+```{r}
+# this chunk (or line) is necessary,
+# because there is at the moment no interactive exercise
+# without this chunk (or line) learnr generates the following error:
+# "Warning: Error in download$filter: attempt to apply non-function
+#   [No stack trace available]"
+learnr::initialize_tutorial()
+```
+
+## Example from Google Group
+
+```{r bootstrap-page-example, context="render", eval="false"}
+# see: https://groups.google.com/forum/#!topic/shiny-discuss/vbvRaaT1nPw
+bootstrapPage(
+  tags$div(id = "mainContainer",
+    "This is text in the main container"
+  ),
+  tags$div(class = "btn btn-primary", "Here's a button")
+
+)
+```
+
+## Example with Text String
+
+```{r bootstrap-page-with-text-string, context="render", eval="false"}
+bootstrapPage(title = "Instructions",
+    fluidRow(column(width = 10, "Here comes text. With this short demo I want to explore possible interactive szenarios for a new edition of by Geoff Cumming and Robert Calin-Jageman (2017, New York: Routledge) or for short", em("ITNS"), "Test with URL ", a(href="https://www.routledgetextbooks.com/textbooks/9781138825529/default.php", "Test")),
+             column(width = 2, align = "left",
+                      img(src="../images/itns-cover.png", width=100))))
+```
+
+## Example with HTML Function
+
+```{r bootstrap-page-with-HTML-function, context="render", eval="false"}
+bootstrapPage(title = "Instructions",
+    fluidRow(column(width = 2, align = "left",
+                      img(src="../images/itns-cover.png", width=120)),
+             column(width = 10, HTML("With this short demo I want to explore possible interactive szenarios for a new edition of <a href='https://www.routledgetextbooks.com/textbooks/9781138825529/default.php'>Introduction to the New Statistics: Estimation, Open Science, and Beyond</a> by Geoff Cumming and Robert Calin-Jageman (2017, New York: Routledge) or for short <em>ITNS</em>. It is a follow up of the discussion in the  <a hef='https://thenewstatistics.com/itns/2018/10/09/itns-the-second-edition/#comment-99'>ITNS-blog</a>."))))
+```

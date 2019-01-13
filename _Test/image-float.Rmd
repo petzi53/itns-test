@@ -1,0 +1,57 @@
+---
+title: "Image Demo"
+author: "Peter Baumgartner"
+date: "`r Sys.Date()`"
+output: 
+    learnr::tutorial:
+        progressive: true
+        allow_skip: true
+        theme: cerulean
+        css: "css/mystyle.css"
+runtime: shiny_prerendered
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(checkr)
+# tutorial_options(exercise.checker = checkr::check_for_learnr)
+knitr::opts_chunk$set(
+        message = T,
+        error = T,
+        warning = T,
+        comment = '##',
+        highlight = T,
+        prompt = F,
+        echo = F
+        )
+
+```
+
+```{r}
+# this chunk (or line) is necessary,
+# because there is at the moment no interactive exercise
+# without this chunk (or line) learnr generates the following error:
+# "Warning: Error in download$filter: attempt to apply non-function
+#   [No stack trace available]"
+learnr::initialize_tutorial()
+```
+
+
+## With inline style
+
+<img style="float: right; width: 15%"
+    src="../images/itns-cover.png" alt="Cover of ITNS Book>
+Here comes text. With this short demo I want to explore possible interactive szenarios for a new edition of [Introduction to the New Statistics: Estimation, Open Science, and Beyond](https://www.routledgetextbooks.com/textbooks/9781138825529/default.php) by Geoff Cumming and Robert Calin-Jageman (2017, New York: Routledge) or for short _ITNS_. It is a follow up of the discussion in the  [ITNS-blog](https://thenewstatistics.com/itns/2018/10/09/itns-the-second-edition/#comment-99).
+
+Here comes text. With this short demo I want to explore possible interactive szenarios for a new edition of [Introduction to the New Statistics: Estimation, Open Science, and Beyond](https://www.routledgetextbooks.com/textbooks/9781138825529/default.php) by Geoff Cumming and Robert Calin-Jageman (2017, New York: Routledge) or for short _ITNS_. It is a follow up of the discussion in the  [ITNS-blog](https://thenewstatistics.com/itns/2018/10/09/itns-the-second-edition/#comment-99).
+
+## With CSS
+
+<img class="right" 
+    src="../images/itns-cover.png" alt="Cover of ITNS Book">
+Here comes text. With this short demo I want to explore possible interactive szenarios for a new edition of [Introduction to the New Statistics: Estimation, Open Science, and Beyond](https://www.routledgetextbooks.com/textbooks/9781138825529/default.php) by Geoff Cumming and Robert Calin-Jageman (2017, New York: Routledge) or for short _ITNS_. It is a follow up of the discussion in the  [ITNS-blog](https://thenewstatistics.com/itns/2018/10/09/itns-the-second-edition/#comment-99).
+
+Here comes text. With this short demo I want to explore possible interactive szenarios for a new edition of [Introduction to the New Statistics: Estimation, Open Science, and Beyond](https://www.routledgetextbooks.com/textbooks/9781138825529/default.php) by Geoff Cumming and Robert Calin-Jageman (2017, New York: Routledge) or for short _ITNS_. It is a follow up of the discussion in the  [ITNS-blog](https://thenewstatistics.com/itns/2018/10/09/itns-the-second-edition/#comment-99).
+
+

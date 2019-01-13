@@ -1,0 +1,113 @@
+---
+title: "itns Interactive Demo"
+author: "Peter Baumgartner"
+date: "`r Sys.Date()`"
+output: 
+    learnr::tutorial:
+        progressive: true
+        allow_skip: true
+        theme: cerulean
+runtime: shiny_prerendered
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(checkr)
+library(ggplot2)
+library(stringr)
+library(shinyjs)
+# see: https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html
+shiny::addResourcePath("shinyjs", system.file("srcjs", package = "shinyjs"))
+# tutorial_options(exercise.checker = checkr::check_for_learnr)
+knitr::opts_chunk$set(
+        message = T,
+        error = T,
+        warning = T,
+        comment = '##',
+        highlight = T,
+        prompt = F,
+        echo = F
+        )
+
+correct = "<font color='green'>"
+incorrect = "<font color='red'>"
+no_text = "<font color='red'>[not filled]"
+```
+
+<!-- see https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html -->
+<script src="shinyjs/inject.js"></script>
+
+## Test: Hide Button
+
+```{r display-button, context="render"}
+bootstrapPage(shinyjs::useShinyjs(),
+        textInput("myText", "Input"),
+        p('Click the "Submit" button to hide it.'),
+        div(actionButton("Button1", "Submit Answer", 
+        class="btn btn-primary")),        
+        htmlOutput("displaySolution"),
+        hr()
+        )
+
+```
+
+```{r hide-button, context="server"}
+
+# see: https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html
+shinyjs::useShinyjs(html = TRUE)
+
+output$displaySolution <- renderPrint({
+    # renderText({input$myText})
+    observeEvent(input$Button1, {
+        if (input$myText == '') {
+            showModal(modalDialog("You have to fill all the gaps.", 
+                                  easyClose = TRUE, size = "s"))
+            return()
+        } else {
+            shinyjs::hide(id = "Button1")
+            txt <- eventReactive(input$Button1, paste('<div class="alert alert-success" role="alert">', 'This is the solution:', input$myText, '</div>'))
+            output$displaySolution <- txt
+        }
+    })
+})
+```
+
+
+## Test: Modal dialog
+
+```{r modal-dialog1}
+# Display an important message that can be dismissed only by clicking the
+# dismiss button.
+bootstrapPage(
+    actionButton("show", "Show modal dialog")
+)
+```
+
+```{r modal-dialog2, context="server"}
+    observeEvent(input$show, {
+      showModal(modalDialog(
+        title = "Important message",
+        "This is an important message!")
+        )
+        }
+    )
+
+```
+
+
+
+
+
+## Test with a map
+
+```{r}
+library(leaflet)
+
+m <- leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  setView(15.600945, 48.409954, zoom = 18) %>%
+  addMarkers(lng=15.600945, lat=48.409954, popup="Hier wohnt Ingrid und Peter")
+m  # Print the map
+```
+
