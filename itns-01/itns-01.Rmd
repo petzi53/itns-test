@@ -1,5 +1,5 @@
 ---
-title: "itns Tutorial: 01-Chapter "
+title: "itns Interactive Demo"
 author: "Peter Baumgartner"
 date: "`r Sys.Date()`"
 output: 
@@ -38,9 +38,34 @@ no_text = "<font color='red'>[not filled]"
 <!-- see https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html -->
 <script src="shinyjs/inject.js"></script>
 
-## 01: Asking and Answering Research Questions
+## Table of contents
 
-### Research questions (Video)
+<div class="alert alert-info" role="alert">
+  <strong>Info:</strong> There are 6 sections available for free on the https://shinyapps.io server from RStudio. For more material one has to pay or to downlaod and install the open source version. There is the possibility to address via links separated interactive sections which could represent the different chapters of the _ITNS_ book. 
+</div>
+
+In the following table of content only the first chapter has an active link:
+
++ [00-itns](https://pbaumgartner.shinyapps.io/itns-00/): Preface   
++ 01-itns: This Demonstration File    
++ 02-itns: Research Fundamentals: Don’t Fool Yourself  
++ 03-itns: Picturing and Describing Data 
++ 04-itns: The Normal Distribution and Sampling   
++ 05-itns: Confidence Intervals and Effect Sizes  
++ 06-itns: p Values, Null Hypothesis Significance Testing, and
+Confidence Intervals   
++ 07-itns: The Independent Groups Design   
++ 08-itns: The Paired Design 
++ 09-itns: Meta-Analysis  
++ 10-itns: Open Science and Planning Research
++ 11-itns: Correlation    
++ 12-itns: Regression 
++ 13-itns: Frequencies, Proportions, and Risk
++ 14-itns: Extended Designs: One Independent Variable 
++ 15-itns: Extended Designs: Two Independent Variables 
++ 16-itns: Future Directions
+
+## Integration of videos
 
 <div class="alert alert-info" role="alert">
   <strong>Info:</strong> It is possible to embed videos into this interactive tutorial. But the video must be published either in YouTube or in Vimeo. I have downloaded just one video from the Routledge website to test this funtionality. I am not sure if this is legally allowed.
@@ -52,7 +77,7 @@ no_text = "<font color='red'>[not filled]"
 ## Research Steps Sequences?
 
 <div class="alert alert-info" role="alert">
-   <strong>Info:</strong> The next exercise tries to use an ordering questions. Unfortunately there is no functionality in `learnr` to for reordering sentences for example via drag & drop. I tried it with a multiple choice question. - Try this question several times, wrong answers give an taylored feedback.
+   <strong>Info:</strong> The next exercise tries to use an ordering questions. Unfortunately there is no functionality in `learnr` to for reordering sentences for example via drag & drop. I tried it with a multiple choice question. - Try this question several times, wrong answers will you give a taylored feedback.
 </div>
 
 There is a common way how research proceeds. Try to figure out the order of the different research steps: 
@@ -76,7 +101,11 @@ question("What is the correct research sequence of the above research phases?",
   allow_retry = TRUE)
 ```
 
-## A Thumbnail Research Sketch
+## Using text with embedded graphics
+
+<div class="alert alert-info" role="alert">
+  <strong>Info:</strong> It is easy to present text with graphics as I have already demonstrated in the previous section of this demo. What follows is another example.
+</div>
 
 Here is the correct order with some details taken form the opinion poll example in the book:
 
@@ -92,11 +121,14 @@ Here is the correct order with some details taken form the opinion poll example 
 
 
 
-## Quiz 1.1 (1st Part)
+## Quizzes
 
+<div class="alert alert-info" role="alert">
+  <strong>Info:</strong> There is a quiz tool integrated in the `learnr`-packages. At the moment there is no possibility to evaluate the quiz programmatically. It is mainly intended as a self determinded excercise. 
+</div>
 
 ```{r quiz1-1}
-quiz(caption = "Quiz 1.1 (1st Part)",
+quiz(caption = "Quiz Demo",
   question("A company is interested in how satisfied its customers are. To help find out, 50 customers are randomly selected to take part in a survey. Which of the following is true?",
     answer("The 50 customers surveyed are the sample, all the company’s customers are the
 population.", correct = TRUE),
@@ -131,7 +163,7 @@ question("If the poll in the previous question was conducted well, which of thes
 
 ```
 
-## Quiz 1.1 (2nd Part)
+## Fill in the Gap
 
 <div class="alert alert-info" role="alert">
   <strong>Info:</strong> In `Learnr` there is no question type "Fill in the Gap". So I had to write it on my own.
@@ -233,77 +265,3 @@ output$displaySolution2 <- renderPrint({
 })
 
 ```
-
-## Test: Hide Button
-
-```{r display-button, context="render"}
-bootstrapPage(shinyjs::useShinyjs(),
-        textInput("myText", "Input"),
-        p('Click the "Submit" button to hide it.'),
-        div(actionButton("Button1", "Submit Answer", 
-        class="btn btn-primary")),        
-        htmlOutput("displaySolution"),
-        hr()
-        )
-
-```
-
-```{r hide-button, context="server"}
-
-# see: https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html
-shinyjs::useShinyjs(html = TRUE)
-
-output$displaySolution <- renderPrint({
-    # renderText({input$myText})
-    observeEvent(input$Button1, {
-        if (input$myText == '') {
-            showModal(modalDialog("You have to fill all the gaps.", 
-                                  easyClose = TRUE, size = "s"))
-            return()
-        } else {
-            shinyjs::hide(id = "Button1")
-            txt <- eventReactive(input$Button1, paste('<div class="alert alert-success" role="alert">', 'This is the solution:', input$myText, '</div>'))
-            output$displaySolution <- txt
-        }
-    })
-})
-```
-
-
-## Modal dialog
-
-```{r modal-dialog1}
-# Display an important message that can be dismissed only by clicking the
-# dismiss button.
-bootstrapPage(
-    actionButton("show", "Show modal dialog")
-)
-```
-
-```{r modal-dialog2, context="server"}
-    observeEvent(input$show, {
-      showModal(modalDialog(
-        title = "Important message",
-        "This is an important message!")
-        )
-        }
-    )
-
-```
-
-
-
-
-
-<!-- ## Map test -->
-
-<!-- ```{r} -->
-<!-- library(leaflet) -->
-
-<!-- m <- leaflet() %>% -->
-<!--   addTiles() %>%  # Add default OpenStreetMap map tiles -->
-<!--   setView(15.600945, 48.409954, zoom = 18) %>% -->
-<!--   addMarkers(lng=15.600945, lat=48.409954, popup="Hier wohnt Ingrid und Peter") -->
-<!-- m  # Print the map -->
-<!-- ``` -->
-
