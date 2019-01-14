@@ -1,5 +1,5 @@
 ---
-title: "ITNS Demo"
+title: "ITNS Demo: 00"
 author: "Peter Baumgartner"
 date: "`r Sys.Date()`"
 output: 
@@ -37,24 +37,24 @@ knitr::opts_chunk$set(
 learnr::initialize_tutorial()
 ```
 
-# Preface
+# About this demo
 
 ## Goal of this interactive demo
 
 <img style="float: right; width: 15%"
-    src="../images/itns-cover.png" alt="Cover of ITNS Book>
-Here comes text. With this short demo I want to explore possible interactive szenarios for a new edition of [Introduction to the New Statistics: Estimation, Open Science, and Beyond](https://www.routledgetextbooks.com/textbooks/9781138825529/default.php) by Geoff Cumming and Robert Calin-Jageman (2017, New York: Routledge) or for short _ITNS_. It is a follow up of the discussion in the  [ITNS-blog](https://thenewstatistics.com/itns/2018/10/09/itns-the-second-edition/#comment-99).
-
+    src="../images/itns-cover.png" alt="Cover of ITNS Book">
+    
+With this short demo I want to explore possible interactive szenarios for a new edition of [Introduction to the New Statistics: Estimation, Open Science, and Beyond](https://www.routledgetextbooks.com/textbooks/9781138825529/default.php) by Geoff Cumming and Robert Calin-Jageman (2017, New York: Routledge) or for short _ITNS_. It is a follow up of the discussion in the  [ITNS-blog](https://thenewstatistics.com/itns/2018/10/09/itns-the-second-edition/#comment-99).
 
 This demo uses some of the possibilities offered by the R package [learnr](https://rstudio.github.io/learnr/) in conjunction with the powerfull [shiny](https://shiny.rstudio.com/) package. But keep in mind that I am not a programmer and still not very skilled in the programming [R language](https://www.r-project.org/) and the packages mentioned above. My main purpose with this demo is to provide a proof of the concept for the usage of R not only to analyse and visualise complex data sets but also as a tool for learning statistics.
 
 This may sound strange: R is a very complex tool and outside the community already infamous for its steep learning curve. There is no guidance by menues but users have to write code lines and to programme commands for their statistical explorations and analysis. But I think with some care and the right tools there are some educational reason why you should use R especially for introductory courses.
 
-## My educational rationale for learning Statistics
+## Personal educational considerations
 
 From an educational point of view in teaching Statistics one has to overcome two difficulties at the same time:
 
-1. **Understanding of statistical concepts:** Just to hear or read about concepts is not enough. There should also exercises to explore basic theoretical notions. These types of exercises should be independent of the software one is going to use. Borrowing a term by Donald Schön these tasks are so-called "local experiments". 
+**Understanding of statistical concepts:** Just to hear or read about concepts is not enough. There should also exercises to explore basic theoretical notions. These types of exercises should be independent of the software one is going to use. Borrowing a term by Donald Schön these tasks are so-called "local experiments". 
 
 Besides of the new content aspects of the _ITNS_ book (changed importance of statistical significance and the integrration of Open Science tools) it also applies educational innovation in using many local experiments. To illustrate what I mean with local experiments two example from the book:
 
@@ -63,9 +63,9 @@ Besides of the new content aspects of the _ITNS_ book (changed importance of sta
 
 _ITNS_ is using ESCI --- a special Excel programmed software --- for these kinds of inquiries. These exercises are great and are one of the outstanding features of _ITNS_ but they lack connection to a modern statistical software. In my opinion it does not make sense to learn tools expeically provided for learning concepts and later to learn to tranfer this kind of knowledge to real world conditions.
 
-2. **Learning and applying R:** These second types of exercises are tool dependent. One has to know how the R language works, what kind of commands, functions and packages one has to use. Because of an overwhelming complexity R has a steep learning curve which has to be adressed carefully. 
+**Learning and applying R:** These second types of exercises are tool dependent. One has to know how the R language works, what kind of commands, functions and packages one has to use. Because of its complexity R has a steep learning curve which has to be adressed carefully. 
 
-_ITNS_ is using some additional exploratory files for SPSS and R usage. As important these files are, they provide not the required level of detailed instructions for beginners and do not include the above mentioned local exeripemts.
+_ITNS_ is using some additional exploratory files for SPSS and R usage. As important these files are, they provide not the required level of detailed instructions for beginners and do not include the above mentioned local experiments.
 
 **References:**
 
@@ -84,13 +84,13 @@ The following suggested learning outcomes provide information at the course leve
   The following learning outcomes are my tentative approximation and has to be adapted/revised/changed by the book authors. 
 </div>
 
-Having successfully completed the _ITNS_ book with the planned interactive course you will be able to:
+Having successfully completed the _ITNS_ book with the planned interactive course you will be able …
 
-+ explain the differences between the NHST (Null hypothesis significance testing) and the new statistics approach (effect sizes, confidence intervals, and meta-analysis).
++ to explain the differences between the NHST (Null hypothesis significance testing) and the new statistics approach (effect sizes, confidence intervals, and meta-analysis).
 + to follow the new statistical approach of estimation by using the R programme package.
-+ manipulate and transform data with R to bring them in a format suitable for exploratory data analysis
-+ create high quality data visualizations with the R package ggplot2
-+ apply Open Science procedures in order to foster transparency and reproducibility to your research projects
++ to manipulate and transform data with R to bring them in a format suitable for exploratory data analysis
++ to create high quality data visualizations with the R package ggplot2
++ to apply Open Science procedures in order to foster transparency and reproducibility to your research projects
 
 **References:**
 
@@ -110,5 +110,5 @@ This demonstration is written in R Markdown and uses the [`learnr`](https://rstu
 
 I have written this tutorial to rebuild my own competences in statistics and at the same time to improve my R skills. As I am not an expert on both subject please help to improve this tutorial via pull requests (PR) at GitHub or [contact me](mailto:peter_baumgartner@me.com) for errors or other improvements.
 
-
+<a href="https://pbaumgartner.shinyapps.io/itns-01/" class="btn btn-primary">Go to the next chapter</a>
 

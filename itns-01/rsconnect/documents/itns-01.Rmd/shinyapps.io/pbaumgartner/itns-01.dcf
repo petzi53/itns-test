@@ -1,0 +1,12 @@
+name: itns-01
+title: itns-01
+username:
+account: pbaumgartner
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 640404
+bundleId: 1812996
+url: https://pbaumgartner.shinyapps.io/itns-01/
+when: 1547461576.76225
+asMultiple: FALSE
+asStatic: FALSE
