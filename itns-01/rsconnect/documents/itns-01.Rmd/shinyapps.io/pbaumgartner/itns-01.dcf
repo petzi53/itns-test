@@ -5,8 +5,8 @@ account: pbaumgartner
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 640404
-bundleId: 1812996
+bundleId: 1817488
 url: https://pbaumgartner.shinyapps.io/itns-01/
-when: 1547461576.76225
+when: 1547642105.96286
 asMultiple: FALSE
 asStatic: FALSE
