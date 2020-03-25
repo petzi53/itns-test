@@ -32,7 +32,8 @@ ui <- fluidPage(
             tabsetPanel(type = "pills",
                         tabPanel("Histogram", plotOutput(outputId = "distPlot")),
                         tabPanel("Dot Plot", plotOutput(outputId = "dotplot")),
-                        tabPanel("Summary", verbatimTextOutput("summary"))
+                        tabPanel("Summary", verbatimTextOutput("summary")),
+                        tabPanel("Table", tableOutput("table"))
             )
         )
     )
@@ -82,6 +83,12 @@ server <- function(input, output) {
     # Generate a summary of the data ----
     output$summary <- renderPrint({
         summary(df_laptop)
+    })
+
+
+    # Generate an HTML table view of the data ----
+    output$table <- renderTable({
+        df_laptop
     })
 
 
