@@ -1,0 +1,41 @@
+---
+title: "Research process"
+output: 
+    learnr::tutorial:
+        progressive: true
+        allow_skip: true
+        theme: cerulean
+runtime: shiny_prerendered
+---
+
+```{r research-process-setup, include=FALSE}
+library(learnr)
+library(sortable)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<!--
+<div class="topicsFooter"><span class="resetButton">Start Over</span></div>
+-->
+
+```{r sortable-demo}
+# Define the answer options
+research_steps <- c(
+    "Ask a research question.",
+    "Design a study to collect data that can answer the question.",
+    "Carry out the study and collect the data.",
+    "Apply statistical analysis to picture and describe the data, and provide a basis for drawing conclusions.",
+    "Draw conclusions about what the data tell us in answer to our original question.",
+    "Interpret the results, give a critical discussion of the whole study, and prepare a report."
+  )
+
+
+# Initialize the question
+question_rank(
+  "Order the different steps of the research process.",
+  answer(research_steps, correct = TRUE),
+  answer(rev(research_steps), correct = FALSE, message = "Other direction!"),
+  allow_retry = TRUE
+)
+```
+

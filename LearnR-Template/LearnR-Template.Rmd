@@ -1,0 +1,41 @@
+---
+title: "Chap. 01"
+author: "Peter Baumgartner"
+date: "`r Sys.Date()`"
+output: 
+    learnr::tutorial:
+        progressive: true
+        allow_skip: true
+        theme: cerulean
+runtime: shiny_prerendered
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(checkr)
+library(ggplot2)
+tutorial_options(exercise.checker = checkr::check_for_learnr)
+knitr::opts_chunk$set(
+        message = T,
+        error = T,
+        warning = T,
+        comment = '##',
+        highlight = T,
+        prompt = F,
+        echo = F
+        )
+
+## Global Variables --------------------------------------------------------------
+# source('www/check_test.R')
+theme_update(plot.title = element_text(hjust = 0.5, face = "bold"))
+# nff <- sort(c(108, 103, 252, 121, 93, 57, 40, 53, 22, 116, 98))
+```
+
+# Chapter 01
+
+## Overview of Chapter 01
+
+### Basic notions
+
+This is the first paragraph 

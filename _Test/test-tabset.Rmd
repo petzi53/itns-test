@@ -1,0 +1,17 @@
+---
+title: "01 Tutorial"
+output: 
+    learnr::tutorial:
+        self_contained: true
+runtime: shiny_prerendered
+---
+
+## Introduction {.tabset}    
+
+### Base R
+
+This is the first tabset
+
+### Tidyverse 
+
+This is a second tabset

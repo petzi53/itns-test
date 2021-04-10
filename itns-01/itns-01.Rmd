@@ -41,6 +41,13 @@ knitr::opts_chunk$set(
 # # but still got an error; this time with package S4Vectors
 # library(BiocInstaller)
 
+
+my_theme <- theme_light() +
+        theme(plot.title = element_text(size = 10, face = "bold", hjust = 0.5))
+        theme(plot.background = element_rect(color = NA, fill = NA)) +
+        theme(plot.margin = margin(1, 0, 0, 0, unit = 'cm'))
+
+
 correct = "<font color='green'>"
 incorrect = "<font color='red'>"
 df_laptop <- read_csv("Describe_Laptop.csv")
@@ -49,18 +56,6 @@ laptop <- deframe(df_laptop) # covert tibble to vector
 
 <!-- see https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html -->
 <script src="shinyjs/inject.js"></script>
-
-
-```{r generate-my-own-theme, include=FALSE}
-
-my_theme <- theme_light() +
-        theme(plot.title = element_text(size = 10, face = "bold", hjust = 0.5))
-        theme(plot.background = element_rect(color = NA, fill = NA)) +
-        theme(plot.margin = margin(1, 0, 0, 0, unit = 'cm'))
-
-        
-```
-
 
 
 ## Table of contents
@@ -72,7 +67,7 @@ my_theme <- theme_light() +
 In the following table of content only the first chapter has an active link:
 
 + [00-itns](https://pbaumgartner.shinyapps.io/itns-00/): Preface   
-+ 01-itns: This Demonstration File    
++ 01-itns: Asking and Answering Research Questions 
 + 02-itns: Research Fundamentals: Don’t Fool Yourself  
 + 03-itns: Picturing and Describing Data 
 + 04-itns: The Normal Distribution and Sampling   
@@ -319,7 +314,7 @@ I will start here with a predefined set of data: The laptop transcription data f
 
 
 ```{r laptop-data, echo=FALSE, message=FALSE}
-sliderInput("bins", "Number of bins:", min = 20, max = 40, value = 31)
+sliderInput("bins", "Number of bins:", min = 5, max = 15, value = 9)
 # laptop1 <- read_csv("Describe_Laptop.csv")
 plotOutput("laptop1")
 plotOutput("distPlot1")
@@ -347,14 +342,18 @@ output$laptop1 <- renderPlot({
         factor = -0.001
     }
     ggplot(df_laptop, aes(x = `Transcription%`)) +
-    geom_dotplot(binwidth = binsDiff, fill="red", color="black", 
-                 dotsize = 1 + ((input$bins - 30) * factor))  +
-        labs(
-            title = "Figure 3.1: A stacked dot plot of the verbatim transcription data, in percent for the Laptop group,
+      geom_dotplot(
+        binwidth = binsDiff,
+        fill = "red",
+        color = "black",
+        dotsize = .5 + ((input$bins - 30) * factor)
+      )  +
+      labs(
+        title = "Figure 3.1: A stacked dot plot of the verbatim transcription data, in percent for the Laptop group,
             with N = 31, from Study 1 of Mueller and Oppenheimer (2014)",
-            x = "X (Transcription %)",
-            y = NULL
-            ) +
+        x = "X (Transcription %)",
+        y = NULL
+      ) +
         coord_fixed(ratio = 12, expand = TRUE, clip = "on") +
         my_theme +
         theme(panel.grid.major.x = element_blank(),
@@ -379,7 +378,7 @@ output$distPlot1 <- renderPlot({
 ## Manipulating data
 
 <div class="alert alert-info" role="alert">
-  <strong>Info:</strong> What follows is a very simple demonstration of data manipulation. Depending of the educational task you can elaborate these kind of exercises and write checker-function to test if the answer was correct and to give adequate and specific feedback. The following two exercises so not have these more complex funtionality.
+  <strong>Info:</strong> What follows is a very simple demonstration of data manipulation. Depending of the educational task you can elaborate these kind of exercises and write checker-function to test if the answer was correct and to give adequate and specific feedback. The following two exercises do not have these more complex functionality.
 </div>
 
 ```{r laod-laptop-data}

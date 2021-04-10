@@ -1,0 +1,314 @@
+---
+title: "Dot Plots & Histograms"
+author: "Peter Baumgartner"
+date: "`r Sys.Date()`"
+output: 
+    learnr::tutorial:
+        progressive: true
+        allow_skip: true
+        theme: cerulean
+runtime: shiny_prerendered
+description: "itns chapter 3, section: Dot plots and Frequency Histogram, p.46-48"
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(checkr)
+library(tidyverse)
+library(ggplot2)
+library(stringr)
+library(shinyjs)
+library(grid)
+library(modeest)
+# see: https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html
+# shiny::addResourcePath("shinyjs", system.file("srcjs", package = "shinyjs"))
+# tutorial_options(exercise.checker = checkr::check_for_learnr)
+knitr::opts_chunk$set(
+        message = T,
+        error = T,
+        warning = T,
+        comment = '##',
+        highlight = T,
+        prompt = F,
+        echo = F
+        )
+
+# because of error: "Unable to determine package source for Bioconductor package Biobase: 
+# Repository must be specified"
+# see: https://support.bioconductor.org/p/107298/
+# also a more complex procedure with the same result: https://community.rstudio.com/t/failing-to-deploy-shinyapp-depending-on-bioconductor-packages/6970
+# options(repos = BiocInstaller::biocinstallRepos())
+# # but still got an error; this time with package S4Vectors
+# library(BiocInstaller)
+
+
+my_theme <- theme_light() +
+        theme(plot.title = element_text(size = 10, face = "bold", hjust = 0.5))
+        theme(plot.background = element_rect(color = NA, fill = NA)) +
+        theme(plot.margin = margin(1, 0, 0, 0, unit = 'cm'))
+
+
+correct = "<font color='green'>"
+incorrect = "<font color='red'>"
+df_laptop <- read_csv("Describe_Laptop.csv")
+laptop <- deframe(df_laptop) # covert tibble to vector
+```
+
+<!-- see https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html -->
+<script src="shinyjs/inject.js"></script>
+
+
+## Pictures of a Data Set
+
+
+```{r laptop-data, echo=FALSE, message=FALSE}
+sliderInput("bins", "Number of bins:", min = 5, max = 15, value = 9)
+# laptop1 <- read_csv("Describe_Laptop.csv")
+plotOutput("laptop1")
+plotOutput("distPlot1")
+textOutput("numBins")
+```
+
+
+```{r dotplot-Describe-Laptop, context="server"}
+
+# output$numBins <- renderText({
+#     x <- laptop$`Transcription%`
+#     bins <- seq(min(x), max(x), length.out = input$bins + 1)
+#     binsDiff <- bins[2] - bins[1]
+#     input$bins
+# })
+
+output$laptop1 <- renderPlot({
+#    x <- laptop$`Transcription%`
+    x <- laptop
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    binsDiff <- bins[2] - bins[1]
+    if (input$bins >= 30) {
+        factor = 0.1
+    } else {
+        factor = -0.001
+    }
+    ggplot(df_laptop, aes(x = `Transcription%`)) +
+      geom_dotplot(
+        binwidth = binsDiff,
+        fill = "red",
+        color = "black",
+        dotsize = .5 + ((input$bins - 30) * factor)
+      )  +
+      labs(
+        title = "Figure 3.1: A stacked dot plot of the verbatim transcription data, in percent for the Laptop group,
+            with N = 31, from Study 1 of Mueller and Oppenheimer (2014)",
+        x = "X (Transcription %)",
+        y = NULL
+      ) +
+        coord_fixed(ratio = 12, expand = TRUE, clip = "on") +
+        my_theme +
+        theme(panel.grid.major.x = element_blank(),
+              panel.grid.minor.x = element_blank(),
+              # plot.margin = unit(c(-2, 0, -2, 0), "cm"),
+              plot.title = element_text(size = 14)) +
+        scale_x_continuous(breaks = seq(0, 40, 1)) +
+        scale_y_continuous(NULL, breaks = NULL) +
+        geom_rug()
+})
+
+output$distPlot1 <- renderPlot({
+#    x <- laptop$`Transcription%`
+    x <- laptop
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    hist(x, breaks = bins, col = 'steelblue', border = 'black',
+         main = "Histogram of Transcription %",
+         xlab = "Transcription %")
+})
+```
+
+## Manipulating data
+
+<div class="alert alert-info" role="alert">
+  <strong>Info:</strong> What follows is a very simple demonstration of data manipulation. Depending of the educational task you can elaborate these kind of exercises and write checker-function to test if the answer was correct and to give adequate and specific feedback. The following two exercises do not have these more complex functionality.
+</div>
+
+```{r laod-laptop-data}
+# lap <- laptop$`Transcription%`
+lap <- laptop
+```
+
+
+### Displaying data
+
+The laptop data set is already loaded into memory under the variable name `lap`. The command to display the first 5 data is already typed in and program is run. Play around and try to find out how many data the laptop set contains.
+
+```{r display-data, exercise=TRUE, exercise.eval=TRUE, exercise.setup="load-laptop-data"}
+head(lap, 5)
+```
+
+```{r display-data-solution}
+lap # just type the variable name to spit out all the data of the vector
+# you could also try `head(lap, 1000)`
+```
+
+### Selecting data
+
+R stores the laptop data internally as a vector. The next example shows you how to select a specific part of the laptop data. Try to find out how you could display the fifth to the seventh data point.
+
+```{r select-laptop-data, exercise=TRUE, exercise.setup="load-laptop-data"}
+lap[5]
+```
+
+
+
+```{r select-laptop-data-hint-1}
+# Use the colon between start and end index of the vector
+```
+
+```{r select-laptop-data-hint-2}
+lap[startIndex:endIndex]
+```
+
+```{r select-laptop-data-hint-3}
+lap[5:7] # this is the solution
+```
+
+## Explore frequency distributions
+
+<div class="alert alert-info" role="alert">
+  <strong>Info:</strong> This is another somewhat more complex example I developed for another purpose. It is not directly related to the _ITNS_ books but shows some possibilities of calculating different measures of frequency distribution generated by randomized numbers.
+</div>
+
+```{r create-distributions, context="data"}
+n = 10000
+shape1 = 5
+shape2 = 2
+set.seed(1234) # tested also with 1111
+d.normal <- rbeta(n, shape1, shape1)
+d.right <-  rbeta(n, shape2, shape1)
+d.left <-   rbeta(n, shape1, shape2)
+``` 
+
+
+```{r my-dist-ui1, context="render"}
+    fluidRow(
+        column(3,
+            radioButtons("type", "Choose a distribution:",
+                           c("Normal" = "norm",
+                             "Right-skewed" = "right",
+                             "Left-skewed" = "left")
+                        ),
+            checkboxInput("newDist", "Create a new distribution?", FALSE)
+            ),
+        column(9, htmlOutput("distText"))
+    ) # end of fluidRow
+    fluidRow(
+        column(8,
+              plotOutput("distPlot")
+              )
+)
+
+
+
+
+
+```
+
+
+
+```{r my-dist-server1,  context="server"}
+
+explainNormal <- "The <b>normal distribution</b> is the most important and most widely used distribution in statistics. It is sometimes called the <i>bell curve</i> or <i>Gaussian curve</i>. Examples are: Height of people, blood pressure, points on a test.
+<br />
+Some features you can see here: 
+<ul>
+<li>The curve is symmetric at the center.</li>
+<li>The curve is denser in the center and less dense in the tails.</li>
+<li>The mean, mode and median are all equal.</li>
+</ul>"
+
+    
+explainRight  <- "This is a <b>right-skewed distribution</b>, also called a positevely skewed distribution. This naming schema could be confusing (it was at least for me!) as you have to draw the name from the tail (and not from the peak) of the distribution. Here the longer tail is on the right resp. positive side, therefore it is a right-skewed or positevely skewed distribution.</br>
+
+Another important issue to remember this naming schema: On this type of distribution is the mean always situated more on the right resp. positive side of mode and median."
+
+explainLeft   <- "This is the <b>left-skewed distribution</b>, also called a negatively skewed distribution. Here the longer tail is on the left resp. negative side of the peak. Therefore it is the a left-skewed or negatively skewed distribution.</br>
+
+Another important issue to remember this naming schema: On left-skewed distributions is the mean always situated more on the left resp. negative side of mode and median."
+
+n = 10000
+mean = 0.5
+sd = 0.15
+method = "beta"
+shape1 = 5
+shape2 = 2
+binwidth = .025
+b  <- seq(0, 1, by = binwidth)
+set.seed(1234)
+
+ output$distPlot <- renderPlot({
+    switch(input$type,
+        norm    = {modusIntercept <- mlv(method, shape1, shape1)[[1]]
+                    ifelse (input$newDist, 
+                            histo <- as_tibble(rbeta(n,shape1, shape1)),
+                            histo <- as_tibble(d.normal))
+                    caption <- "Normal distribution"
+                    output$distText <- renderText(explainNormal)},
+        right   = {modusIntercept <- mlv(method, shape2, shape1)[[1]]
+                    ifelse (input$newDist,
+                            histo <- as_tibble(rbeta(n,shape2, shape1)),
+                            histo <- as_tibble(d.right))
+                   caption <- "Positively or right-skewed distribution"
+                   output$distText <- renderText(explainRight)},
+        left    = {modusIntercept <- mlv(method, shape1, shape2)[[1]]
+                    ifelse (input$newDist, 
+                            histo <- as_tibble(rbeta(n,shape1, shape2)),
+                            histo <- as_tibble(d.left))
+                   caption <- "Negatively or left-skewed distribution"
+                   output$distText <- renderText(explainLeft)}
+      )
+
+ggplot(histo, aes(x = value, mean = mean, sd = sd, binwidth = binwidth, n = n)) +
+    geom_histogram(aes(y = ..count..),
+           alpha = 0.25,
+           breaks = b,
+           binwidth = binwidth,  
+           colour = "black", 
+           fill = "white") +
+    geom_line(aes(y = ..density.. * n * binwidth, 
+                  colour = " Empirical Distribution"),
+           size = 1, stat = 'density') +
+    stat_function(fun = function(x) 
+           {dnorm(x, mean = mean, sd = sd) * n * binwidth}, 
+           aes(colour = " Normal Distribution"), size = 1) +
+    labs(x = "Score", y = "Frequency") +
+    # scale_colour_manual(name = "Distribution",
+    #                     values = c("ForestGreen", "#FF00FF")) +
+    geom_vline(
+        aes(colour = "Mode (empirical)",
+        xintercept = modusIntercept),
+        linetype = "longdash",
+        # color = "black",
+        size = 1.5
+        ) +
+    geom_vline(
+        aes(colour = "Mean (empirical)",
+        xintercept = mean(histo$value)),
+        linetype = "longdash",
+        # color = "blue",
+        size = 1.5
+        ) +
+    geom_vline(
+        aes(colour = "Median (empirical)",
+        xintercept = median(histo$value)),
+        linetype = "longdash",
+        # color = "tomato",
+        size = 1.5
+        ) +
+    scale_colour_manual(name = "Colors",
+                        values = c("ForestGreen", "#FF00FF",
+                                   "black", "blue", "tomato")) +
+    labs(caption = "vertical lines: black = mode, red = median, blue = mean")
+    
+})
+```
+
+

@@ -1,0 +1,99 @@
+---
+title: "itns Test"
+author: "Peter Baumgartner"
+date: "`r Sys.Date()`"
+output: 
+    learnr::tutorial:
+        progressive: true
+        allow_skip: true
+        theme: cerulean
+runtime: shiny_prerendered
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(shinyjs)
+library(tidyverse)
+# see: https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html
+shiny::addResourcePath("shinyjs", system.file("srcjs", package = "shinyjs"))
+
+knitr::opts_chunk$set(
+        message = T,
+        error = T,
+        warning = T,
+        comment = '##',
+        highlight = T,
+        prompt = F,
+        echo = F
+        )
+
+
+correct = "<font color='green'>"
+incorrect = "<font color='red'>"
+df_laptop <- read_csv("itns-01/Describe_Laptop.csv")
+laptop <- deframe(df_laptop) # covert tibble to vector
+```
+
+<!-- see https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html -->
+<script src="shinyjs/inject.js"></script>
+
+
+```{r generate-my-own-theme, include=FALSE}
+
+my_theme <- theme_light() +
+        theme(plot.title = element_text(size = 10, face = "bold", hjust = 0.5))
+        theme(plot.background = element_rect(color = NA, fill = NA)) +
+        theme(plot.margin = margin(1, 0, 0, 0, unit = 'cm'))
+
+        
+```
+
+
+
+<div class="alert alert-info" role="alert">
+  <strong>Info:</strong> What follows is a very simple demonstration of data manipulation. Depending of the educational task you can elaborate these kind of exercises and write checker-function to test if the answer was correct and to give adequate and specific feedback. The following two exercises do not have these more complex functionality.
+</div>
+
+```{r laod-laptop-data}
+# lap <- laptop$`Transcription%`
+lap <- laptop
+```
+
+
+### Displaying data
+
+The laptop data set is already loaded into memory under the variable name `lap`. The command to display the first 5 data is already typed in and program is run. Play around and try to find out how many data the laptop set contains.
+
+```{r display-data, exercise=TRUE, exercise.eval=TRUE, exercise.setup="load-laptop-data"}
+head(lap, 5)
+```
+
+```{r display-data-solution}
+lap # just type the variable name to spit out all the data of the vector
+# you could also try `head(lap, 1000)`
+```
+
+### Selecting data
+
+R stores the laptop data internally as a vector. The next example shows you how to select a specific part of the laptop data. Try to find out how you could display the fifth to the seventh data point.
+
+```{r select-laptop-data, exercise=TRUE, exercise.setup="load-laptop-data"}
+lap[5]
+```
+
+
+
+```{r select-laptop-data-hint-1}
+# Use the colon between start and end index of the vector
+```
+
+```{r select-laptop-data-hint-2}
+lap[startIndex:endIndex]
+```
+
+```{r select-laptop-data-hint-3}
+lap[5:7] # this is the solution
+```
+
+

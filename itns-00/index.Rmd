@@ -9,6 +9,7 @@ output:
         theme: cerulean
         css: "css/mystyle.css"
 runtime: shiny_prerendered
+description: About the book, my goals, and learning outcomes.
 ---
 
 
