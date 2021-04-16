@@ -10,7 +10,6 @@ output:
 runtime: shiny_prerendered
 ---
 
-
 ```{r setup, include=FALSE}
 library(learnr)
 library(checkr)
@@ -55,59 +54,112 @@ laptop <- deframe(df_laptop) # covert tibble to vector
 ```
 
 <!-- see https://cran.r-project.org/web/packages/shinyjs/vignettes/shinyjs-usage.html -->
+
+```{=html}
 <script src="shinyjs/inject.js"></script>
-
-
+```
 ## Table of contents
 
-<div class="alert alert-info" role="alert">
-  <strong>Info:</strong> There are 6 sections available for free on the https://shinyapps.io server from RStudio. For more material one has to pay or to downlaod and install the open source version. There is the possibility to address via links separated interactive sections which could represent the different chapters of the _ITNS_ book. 
-</div>
+::: {.alert .alert-info role="alert"}
+<strong>Info:</strong> There are 6 sections available for free on the <https://shinyapps.io> server from RStudio. For more material one has to pay or to downlaod and install the open source version. There is the possibility to address via links separated interactive sections which could represent the different chapters of the *ITNS* book.
+:::
 
 In the following table of content only the first chapter has an active link:
 
-+ [00-itns](https://pbaumgartner.shinyapps.io/itns-00/): Preface   
-+ 01-itns: Asking and Answering Research Questions 
-+ 02-itns: Research Fundamentals: Don’t Fool Yourself  
-+ 03-itns: Picturing and Describing Data 
-+ 04-itns: The Normal Distribution and Sampling   
-+ 05-itns: Confidence Intervals and Effect Sizes  
-+ 06-itns: p Values, Null Hypothesis Significance Testing, and
-Confidence Intervals   
-+ 07-itns: The Independent Groups Design   
-+ 08-itns: The Paired Design 
-+ 09-itns: Meta-Analysis  
-+ 10-itns: Open Science and Planning Research
-+ 11-itns: Correlation    
-+ 12-itns: Regression 
-+ 13-itns: Frequencies, Proportions, and Risk
-+ 14-itns: Extended Designs: One Independent Variable 
-+ 15-itns: Extended Designs: Two Independent Variables 
-+ 16-itns: Future Directions
+-   [00-itns](https://pbaumgartner.shinyapps.io/itns-00/): Preface\
+-   01-itns: Asking and Answering Research Questions
+-   02-itns: Research Fundamentals: Don't Fool Yourself\
+-   03-itns: Picturing and Describing Data
+-   04-itns: The Normal Distribution and Sampling\
+-   05-itns: Confidence Intervals and Effect Sizes\
+-   06-itns: p Values, Null Hypothesis Significance Testing, and Confidence Intervals\
+-   07-itns: The Independent Groups Design\
+-   08-itns: The Paired Design
+-   09-itns: Meta-Analysis\
+-   10-itns: Open Science and Planning Research
+-   11-itns: Correlation\
+-   12-itns: Regression
+-   13-itns: Frequencies, Proportions, and Risk
+-   14-itns: Extended Designs: One Independent Variable
+-   15-itns: Extended Designs: Two Independent Variables
+-   16-itns: Future Directions
 
 ## Integration of videos
 
-<div class="alert alert-info" role="alert">
-  <strong>Info:</strong> It is possible to embed videos into this interactive tutorial. But the video must be published either in YouTube or in Vimeo. I have downloaded just one video from the Routledge website to test this funtionality. I am not sure if this is legally allowed.
-</div>
-
+::: {.alert .alert-info role="alert"}
+<strong>Info:</strong> It is possible to embed videos into this interactive tutorial. But the video must be published either in YouTube or in Vimeo. I have downloaded just one video from the Routledge website to test this funtionality. I am not sure if this is legally allowed.
+:::
 
 ![](https://youtu.be/oRf7iWEsx9o)
 
+## Integration von H5P Exercises
+
+Hier kommt einleitender Text
+
+### Das ist ein kleines Übungsset
+
+Die normalen Text sind im Verhältnis zu den H5P Texten zu klein. Oder ist es umgekehrt und die Texte in den H5P-Übungen gehören kleiner?
+
+Im H5P Text lässt sich wenig machen.
+
+
+![Video Research Question](images/chap01-video-research-question-min.png "QR Code for interactive video exercise Research Question in Chapter 1")
+
+Und wie sieht es mit einem [direkten Link](https://peter.baumgartner.name/wp-admin/admin-ajax.php?action=h5p_embed&id=332) aus.
+Problem: Es wird die Seite in voller Breite geöffnet. Besser ist es daher vielleicht auf eine spezielle WordPress-Seite zu verweisen: [Mit diesem Link](https://peter.baumgartner.name/itns/itns-01/itns-01-quiz1-question-set/) zum Beispiel.
+
+<iframe src="https://peter.baumgartner.name/wp-admin/admin-ajax.php?action=h5p_embed&amp;id=30" width="960" height="246" frameborder="0" allowfullscreen="allowfullscreen">
+
+</iframe>
+
+```{=html}
+<script src="https://peter.baumgartner.name/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+```
+Und hier geht es weiter mit Text
+
+### Und das hier ist H5P Column
+
+Text vorher
+
+<iframe src="https://peter.baumgartner.name/wp-admin/admin-ajax.php?action=h5p_embed&amp;id=333" width="960" height="2027" frameborder="0" allowfullscreen="allowfullscreen">
+
+</iframe>
+
+```{=html}
+<script src="https://peter.baumgartner.name/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+```
+
+<div>Text nachher</div>
+
+
+
+### Und schließlich gibt es noch Interactive Books
+
+Beliebiger Text vorher
+
+<iframe src="https://peter.baumgartner.name/wp-admin/admin-ajax.php?action=h5p_embed&amp;id=334" width="960" height="839" frameborder="0" allowfullscreen="allowfullscreen">
+
+</iframe>
+
+```{=html}
+<script src="https://peter.baumgartner.name/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js" charset="UTF-8"></script>
+```
+Und anschließend weiterer Text.
+
 ## Research Steps Sequences?
 
-<div class="alert alert-info" role="alert">
-   <strong>Info:</strong> The next exercise tries to use an ordering questions. Unfortunately there is no functionality in `learnr` to for reordering sentences for example via drag & drop. I tried it with a multiple choice question. - Try this question several times, wrong answers will you give a taylored feedback.
-</div>
+::: {.alert .alert-info role="alert"}
+<strong>Info:</strong> The next exercise tries to use an ordering questions. Unfortunately there is no functionality in `learnr` to for reordering sentences for example via drag & drop. I tried it with a multiple choice question. - Try this question several times, wrong answers will you give a taylored feedback.
+:::
 
-There is a common way how research proceeds. Try to figure out the order of the different research steps: 
+There is a common way how research proceeds. Try to figure out the order of the different research steps:
 
-1. Apply statistical analysis.
-2. Design a study to collect data.
-3. Ask a research question.
-4. Draw conclusions.
-5. Interpret the results.
-6. Carry out the study and collect the data.
+1.  Apply statistical analysis.
+2.  Design a study to collect data.
+3.  Ask a research question.
+4.  Draw conclusions.
+5.  Interpret the results.
+6.  Carry out the study and collect the data.
 
 ```{r research-steps}
 question("What is the correct research sequence of the above research phases?",
@@ -123,29 +175,27 @@ question("What is the correct research sequence of the above research phases?",
 
 ## Using text with embedded graphics
 
-<div class="alert alert-info" role="alert">
-  <strong>Info:</strong> It is easy to present text with graphics as I have already demonstrated in the previous section of this demo. What follows is another example.
-</div>
+::: {.alert .alert-info role="alert"}
+<strong>Info:</strong> It is easy to present text with graphics as I have already demonstrated in the previous section of this demo. What follows is another example.
+:::
 
 Here is the correct order with some details taken form the opinion poll example in the book:
 
-1. **Ask a research question.** What’s the support for Proposition A in the population of people likely to vote?
-2. **Design a study to collect data that can answer the question.** Design a poll that will ask a sample of intending voters about their support for Proposition A.
-3. **Carry out the study and collect the data.** Choose a sample of intending voters and ask them about their support for the proposition.
-4. **Apply statistical analysis to picture and describe the data, and provide a basis for drawing conclusions.** Calculate that 53% of people in the sample say they support the proposition. Use knowledge of the poll design, especially the size of the sample, to calculate from the data that the margin of error is 2%, and therefore the confidence interval extends from 51% to 55%. Prepare the following figure:
+1.  **Ask a research question.** What's the support for Proposition A in the population of people likely to vote?
+2.  **Design a study to collect data that can answer the question.** Design a poll that will ask a sample of intending voters about their support for Proposition A.
+3.  **Carry out the study and collect the data.** Choose a sample of intending voters and ask them about their support for the proposition.
+4.  **Apply statistical analysis to picture and describe the data, and provide a basis for drawing conclusions.** Calculate that 53% of people in the sample say they support the proposition. Use knowledge of the poll design, especially the size of the sample, to calculate from the data that the margin of error is 2%, and therefore the confidence interval extends from 51% to 55%. Prepare the following figure:
 
 ![](../images/opinion-poll.png)
 
-5. **Draw conclusions about what the data tell us in answer to our original question.** We take the 53% as the best estimate the data can give us of support in the population of likely voters, and the 2% margin of error as indicating the uncertainty in that estimate. In the figure, the dot marks the best estimate, and the confidence interval indicates the range of uncertainty.
-6. **Interpret the results, give a critical discussion of the whole study, and prepare a report.** Think about the next study. Most likely, the true level of support among intending voters is within the interval from 51% to 55%, therefore the proposition is likely to be approved — although it may not be.
-
-
+5.  **Draw conclusions about what the data tell us in answer to our original question.** We take the 53% as the best estimate the data can give us of support in the population of likely voters, and the 2% margin of error as indicating the uncertainty in that estimate. In the figure, the dot marks the best estimate, and the confidence interval indicates the range of uncertainty.
+6.  **Interpret the results, give a critical discussion of the whole study, and prepare a report.** Think about the next study. Most likely, the true level of support among intending voters is within the interval from 51% to 55%, therefore the proposition is likely to be approved --- although it may not be.
 
 ## Quizzes
 
-<div class="alert alert-info" role="alert">
-  <strong>Info:</strong> There is a quiz tool integrated in the `learnr`-packages. At the moment there is no possibility to evaluate the quiz programmatically. It is mainly intended as a self determinded excercise. 
-</div>
+::: {.alert .alert-info role="alert"}
+<strong>Info:</strong> There is a quiz tool integrated in the `learnr`-packages. At the moment there is no possibility to evaluate the quiz programmatically. It is mainly intended as a self determinded excercise.
+:::
 
 ```{r quiz1-1}
 quiz(caption = "Quiz Demo",
@@ -185,10 +235,9 @@ question("If the poll in the previous question was conducted well, which of thes
 
 ## Fill in the Gap
 
-<div class="alert alert-info" role="alert">
-  <strong>Info:</strong> In `Learnr` there is no question type "Fill in the Gap". So I had to write it on my own.
-</div>
-
+::: {.alert .alert-info role="alert"}
+<strong>Info:</strong> In `Learnr` there is no question type "Fill in the Gap". So I had to write it on my own.
+:::
 
 ```{r my-gap-task1, context="render"}
 
@@ -220,7 +269,6 @@ bootstrapPage(
         hr()
     )
 ```
-
 
 ```{r my-gap-solution1, context="server"}
 
@@ -288,30 +336,27 @@ output$displaySolution2 <- renderPrint({
 
 ## Pause, Reflect, and Discuss
 
-<div class="alert alert-info" role="alert">
-  <strong>Info:</strong> In _ITNS_ there are many occasion where students are motivated to "pause, reflect, and discuss" the issues just explained and some question posed by the authors. This is meant to take notes by paper & pencil, so a digital version would only be a bad substitute. Especially as in the work of Mueller and Oppenheimer (2014) it turned out, that students on average remembered more after taking notes with pen than with laptop.
+::: {.alert .alert-info role="alert"}
+<strong>Info:</strong> In *ITNS* there are many occasion where students are motivated to "pause, reflect, and discuss" the issues just explained and some question posed by the authors. This is meant to take notes by paper & pencil, so a digital version would only be a bad substitute. Especially as in the work of Mueller and Oppenheimer (2014) it turned out, that students on average remembered more after taking notes with pen than with laptop.
 
-But digital note taking could be an additional ressource with its own value, e.g. to share and discuss it over the internet with the help of social media.  There is no R solution available. The best I came up with are links from the R tutorial to note taking apps.
-</div>
+But digital note taking could be an additional ressource with its own value, e.g. to share and discuss it over the internet with the help of social media. There is no R solution available. The best I came up with are links from the R tutorial to note taking apps.
+:::
 
 My example is a link to [Evernote](https://www.evernote.com/), which is not only a great app for note taking but has also great sharing functionality. To use the following example you need to download the free version. I have provided a public link which generates a copy of the note written by me. To work collaborativley one has to contact the author and to ask for a personal invation via eMail address. -- There are many note taking apps out there: See this [article](https://www.computerworlduk.com/galleries/applications/-best-note-taking-apps--3643394/) and this [video](https://www.youtube.com/watch?v=7eIVmaWNB4g) for some other examples.
 
-<div class="alert alert-success" role="alert">
-<img style="float: left; margin-right: 10px"
-    src="../images/pause-reflect-discuss.png" alt="Logo for "pause, reflect and discuss">
-Often in the text the student is asked to pause, reflect, and discuss intriguing issues. Research shows this is an effective learning technique, so we often ask students to write about a topic or discuss it with another student, to encourage critical thinking. These are also useful as prompts for class discussion or activities. 
+::: {.alert .alert-success role="alert"}
+\<img style="float: left; margin-right: 10px" src="../images/pause-reflect-discuss.png" alt="Logo for "pause, reflect and discuss"\> Often in the text the student is asked to pause, reflect, and discuss intriguing issues. Research shows this is an effective learning technique, so we often ask students to write about a topic or discuss it with another student, to encourage critical thinking. These are also useful as prompts for class discussion or activities.
 
-[Click here for an example](https://www.evernote.com/l/ADR8ep4iUYFMS5YGnXSw6AAusWi9UPcmzRM)  to take an individual note to whatever topic you want.
-</div>
+[Click here for an example](https://www.evernote.com/l/ADR8ep4iUYFMS5YGnXSw6AAusWi9UPcmzRM) to take an individual note to whatever topic you want.
+:::
 
 ## Pictures of a Data Set
 
-<div class="alert alert-info" role="alert">
-  <strong>Info:</strong> This example finally demonstrate the interactive possibilities of this tutorial written with [`learnr`](https://rstudio.github.io/learnr/). In contrast to other interactive statistis programmes like [`Jamovi`](https://www.jamovi.org/) it is not limited by a predefined funtionality but can be programmed with whatever task or user interface in mind.
+::: {.alert .alert-info role="alert"}
+<strong>Info:</strong> This example finally demonstrate the interactive possibilities of this tutorial written with [`learnr`](https://rstudio.github.io/learnr/). In contrast to other interactive statistis programmes like [`Jamovi`](https://www.jamovi.org/) it is not limited by a predefined funtionality but can be programmed with whatever task or user interface in mind.
 
 I will start here with a predefined set of data: The laptop transcription data from chapter three, which are visualized by two graphical representations: by a dotplot and a histogram at the same time. Learner can explore this different visualisation by manipulating the number of bins.
-</div>
-
+:::
 
 ```{r laptop-data, echo=FALSE, message=FALSE}
 sliderInput("bins", "Number of bins:", min = 5, max = 15, value = 9)
@@ -320,7 +365,6 @@ plotOutput("laptop1")
 plotOutput("distPlot1")
 textOutput("numBins")
 ```
-
 
 ```{r dotplot-Describe-Laptop, context="server"}
 
@@ -377,15 +421,14 @@ output$distPlot1 <- renderPlot({
 
 ## Manipulating data
 
-<div class="alert alert-info" role="alert">
-  <strong>Info:</strong> What follows is a very simple demonstration of data manipulation. Depending of the educational task you can elaborate these kind of exercises and write checker-function to test if the answer was correct and to give adequate and specific feedback. The following two exercises do not have these more complex functionality.
-</div>
+::: {.alert .alert-info role="alert"}
+<strong>Info:</strong> What follows is a very simple demonstration of data manipulation. Depending of the educational task you can elaborate these kind of exercises and write checker-function to test if the answer was correct and to give adequate and specific feedback. The following two exercises do not have these more complex functionality.
+:::
 
 ```{r laod-laptop-data}
 # lap <- laptop$`Transcription%`
 lap <- laptop
 ```
-
 
 ### Displaying data
 
@@ -408,8 +451,6 @@ R stores the laptop data internally as a vector. The next example shows you how 
 lap[5]
 ```
 
-
-
 ```{r select-laptop-data-hint-1}
 # Use the colon between start and end index of the vector
 ```
@@ -424,9 +465,9 @@ lap[5:7] # this is the solution
 
 ## Explore frequency distributions
 
-<div class="alert alert-info" role="alert">
-  <strong>Info:</strong> This is another somewhat more complex example I developed for another purpose. It is not directly related to the _ITNS_ books but shows some possibilities of calculating different measures of frequency distribution generated by randomized numbers.
-</div>
+::: {.alert .alert-info role="alert"}
+<strong>Info:</strong> This is another somewhat more complex example I developed for another purpose. It is not directly related to the *ITNS* books but shows some possibilities of calculating different measures of frequency distribution generated by randomized numbers.
+:::
 
 ```{r create-distributions, context="data"}
 n = 10000
@@ -436,8 +477,7 @@ set.seed(1234) # tested also with 1111
 d.normal <- rbeta(n, shape1, shape1)
 d.right <-  rbeta(n, shape2, shape1)
 d.left <-   rbeta(n, shape1, shape2)
-``` 
-
+```
 
 ```{r my-dist-ui1, context="render"}
     fluidRow(
@@ -462,8 +502,6 @@ d.left <-   rbeta(n, shape1, shape2)
 
 
 ```
-
-
 
 ```{r my-dist-server1,  context="server"}
 
@@ -561,5 +599,3 @@ ggplot(histo, aes(x = value, mean = mean, sd = sd, binwidth = binwidth, n = n)) 
     
 })
 ```
-
-
