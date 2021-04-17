@@ -9,3 +9,7 @@ blockquote {
     float: right;
     width: 25%;
 }
+
+.large-font {
+    font-size: 18px;
+}
